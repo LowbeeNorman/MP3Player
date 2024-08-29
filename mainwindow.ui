@@ -15,31 +15,47 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="Playbar" name="playbar" native="true"/>
+    </item>
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <widget class="Home" name="home"/>
-      <widget class="QWidget" name="page_2"/>
+      <widget class="Library" name="songLibrary"/>
      </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="MenuBar" name="menubar" native="true"/>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>
    <class>Home</class>
    <extends>QWidget</extends>
    <header>home.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Playbar</class>
+   <extends>QWidget</extends>
+   <header>playbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Library</class>
+   <extends>QWidget</extends>
+   <header>library.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MenuBar</class>
+   <extends>QWidget</extends>
+   <header>menubar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

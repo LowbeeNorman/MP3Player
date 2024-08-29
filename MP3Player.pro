@@ -10,18 +10,28 @@ CONFIG += c++17
 
 SOURCES += \
     home.cpp \
+    library.cpp \
     main.cpp \
     mainwindow.cpp \
+    menubar.cpp \
+    playbar.cpp \
     playlistbutton.cpp
 
 HEADERS += \
+    bass24/c/bass.h \
     home.h \
+    library.h \
     mainwindow.h \
+    menubar.h \
+    playbar.h \
     playlistbutton.h
 
 FORMS += \
     home.ui \
+    library.ui \
     mainwindow.ui \
+    menubar.ui \
+    playbar.ui \
     playlistbutton.ui
 
 # Default rules for deployment.
@@ -31,3 +41,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     defaultPlaylistPicture.qrc
+
+
+
+
+unix|win32: LIBS += -L$$PWD/bass24/c/x64/ -lbass
+
+INCLUDEPATH += $$PWD/bass24/c/x64
+DEPENDPATH += $$PWD/bass24/c/x64

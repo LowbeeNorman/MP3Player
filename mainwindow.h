@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "bass.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,6 +17,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
+public slots:
+    void changeScreenIndex(int index);
+
+signals:
+    void toggleMenuButton();
 
 private:
     Ui::MainWindow *ui;
