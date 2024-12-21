@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    BASS_Init(-1, 44100, 0, 0, NULL);
 }
 
 void MainWindow::changeScreenIndex(int index){

@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     menubar.cpp \
+    music.cpp \
     playbar.cpp \
     playlistbutton.cpp
 
@@ -23,6 +24,7 @@ HEADERS += \
     library.h \
     mainwindow.h \
     menubar.h \
+    music.h \
     playbar.h \
     playlistbutton.h
 
@@ -49,3 +51,6 @@ unix|win32: LIBS += -L$$PWD/bass24/c/x64/ -lbass
 
 INCLUDEPATH += $$PWD/bass24/c/x64
 DEPENDPATH += $$PWD/bass24/c/x64
+
+DISTFILES += \
+    songs/file_example_MP3_1MG.mp3
