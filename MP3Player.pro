@@ -14,7 +14,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     menubar.cpp \
-    music.cpp \
     playbar.cpp \
     playlistbutton.cpp
 
@@ -24,7 +23,6 @@ HEADERS += \
     library.h \
     mainwindow.h \
     menubar.h \
-    music.h \
     playbar.h \
     playlistbutton.h
 

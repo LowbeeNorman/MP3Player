@@ -20,9 +20,15 @@ public:
 
 public slots:
     void changeScreenIndex(int index);
+    void startSong(std::string* filepath);
+    // void stopSong();
+    // void skipSong();
 
 signals:
     void toggleMenuButton();
+    void songStarted();
+    void songStopped();
+    void songSkipped();
 
 private:
     Ui::MainWindow *ui;

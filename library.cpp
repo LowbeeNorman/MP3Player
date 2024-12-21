@@ -3,11 +3,12 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
-std::string path = "C:/Users/caleb/Documents/GitHub/MP3Player/songs"; // Hardcoded path to songs folder
+std::string path = "C:\\Users\\caleb\\Documents\\GitHub\\MP3Player\\songs"; // Hardcoded path to songs folder
+
 
 std::string getSongPath(std::string name){
     std::string songPath = path;
-    songPath.append("/");
+    songPath.append("\\");
     songPath.append(name);
     songPath.append(".mp3");
     return songPath;
@@ -26,6 +27,11 @@ std::vector<std::string> getSongNames(){
     return songs;
 }
 
+void Library::listItemClicked(QListWidgetItem *item){
+    std::string songName = item->text().toStdString();
+    std::string filePath = getSongPath(songName);
+    emit requestPlaySong(&filePath);
+}
 
 Library::Library(QWidget *parent)
     : QWidget(parent)
@@ -37,7 +43,12 @@ Library::Library(QWidget *parent)
         QString qsong = QString::fromStdString(song);
         ui->songList->addItem(qsong);
     }
+    connect(ui->songList, &QListWidget::itemClicked, this, &Library::listItemClicked);
 }
+
+
+
+
 
 Library::~Library()
 {

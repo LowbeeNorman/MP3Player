@@ -2,6 +2,7 @@
 #define LIBRARY_H
 
 #include <QWidget>
+#include <QListWidgetItem>
 
 namespace Ui {
 class Library;
@@ -17,6 +18,12 @@ public:
 
 private:
     Ui::Library *ui;
+
+public slots:
+    void listItemClicked(QListWidgetItem *item);
+
+signals:
+    void requestPlaySong(std::string * filePath);
 };
 
 #endif // LIBRARY_H
