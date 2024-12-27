@@ -24,7 +24,13 @@ private:
 
 
 public slots:
+    // Toggle if button clicked
     void playButtonToggle();
+
+    // Need to force certain states, showing the play and showing the pause
+    void playButtonShowPlay();
+    void playButtonShowPause();
+
     void loopButtonToggle();
     void shuffleButtonToggle();
 
@@ -32,6 +38,8 @@ signals:
     void playPressed();
     void loopPressed();
     void shufflePressed();
+    void musicPlayed();
+    void musicPaused();
 };
 
 

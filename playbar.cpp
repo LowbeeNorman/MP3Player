@@ -1,6 +1,7 @@
 #include "playbar.h"
 #include "ui_playbar.h"
 
+
 Playbar::Playbar(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Playbar)
@@ -27,6 +28,18 @@ void Playbar::playButtonToggle(){
         ui->playButton->setText("Playing");
     }
     emit playPressed();
+}
+
+void Playbar::playButtonShowPlay(){
+    playing = true;
+    ui->playButton->setText("Playing");
+    emit musicPlayed();
+}
+
+void Playbar::playButtonShowPause(){
+    playing = false;
+    ui->playButton->setText("Paused");
+    emit musicPaused();
 }
 
 void Playbar::loopButtonToggle(){

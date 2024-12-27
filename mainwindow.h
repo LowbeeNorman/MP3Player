@@ -21,7 +21,7 @@ public:
 public slots:
     void changeScreenIndex(int index);
     void startSong(std::string* filepath);
-    // void stopSong();
+    void pauseSong();
     // void skipSong();
 
 signals:
