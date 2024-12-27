@@ -3,8 +3,8 @@
 #include "bass24\c\bass.h"
 #include <iostream>
 
-HSAMPLE sample = NULL;
-HCHANNEL channel = NULL;
+HSAMPLE sample;
+HCHANNEL channel;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->songLibrary, &Library::requestPlaySong, this, &MainWindow::startSong);
     connect(this, &MainWindow::songStarted, ui->playbar, &Playbar::playButtonShowPause);
     connect(ui->playbar, &Playbar::musicPaused, this, &MainWindow::pauseSong);
+    connect(ui->playbar, &Playbar::musicPlayed, this, &MainWindow::resumeSong);
 }
 
 MainWindow::~MainWindow()
@@ -35,20 +36,26 @@ const void* getFile(std::string* file){
 
 void MainWindow::startSong(std::string* filepath){
     sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
-    // std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
+    std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
     channel = BASS_SampleGetChannel(sample, 0);
-    // std::cout << "CHANNEL: " << BASS_ErrorGetCode() << std::endl;
+    std::cout << "CHANNEL: " << BASS_ErrorGetCode() << std::endl;
     BASS_ChannelPlay(channel, TRUE);
-    // std::cout << "CHANNELPLAY: " << BASS_ErrorGetCode() << std::endl;
+    std::cout << "CHANNELPLAY: " << BASS_ErrorGetCode() << std::endl;
     BASS_ChannelStart(channel);
-    // std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
+    std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
     emit songStarted();
 }
 
 
 void MainWindow::pauseSong(){
-    if(channel != NULL){
+    if(BASS_ChannelIsActive(channel)){
         BASS_ChannelPause(channel);
+    }
+}
+
+void MainWindow::resumeSong(){
+    if(BASS_ChannelIsActive(channel)){
+        BASS_ChannelStart(channel);
     }
 }
 

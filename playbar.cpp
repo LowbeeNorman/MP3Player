@@ -21,11 +21,13 @@ void Playbar::playButtonToggle(){
     if(playing){
         playing = false;
         ui->playButton->setText("Paused");
+        emit musicPlayed();
 
     }
     else{
         playing = true;
         ui->playButton->setText("Playing");
+        emit musicPaused();
     }
     emit playPressed();
 }
@@ -33,13 +35,13 @@ void Playbar::playButtonToggle(){
 void Playbar::playButtonShowPlay(){
     playing = true;
     ui->playButton->setText("Playing");
-    emit musicPlayed();
+    emit musicPaused();
 }
 
 void Playbar::playButtonShowPause(){
     playing = false;
     ui->playButton->setText("Paused");
-    emit musicPaused();
+    emit musicPlayed();
 }
 
 void Playbar::loopButtonToggle(){
