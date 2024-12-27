@@ -23,7 +23,7 @@ public slots:
     void listItemClicked(QListWidgetItem *item);
 
 signals:
-    void requestPlaySong(std::string * filePath);
+    void requestPlaySong(std::string * filePath, std::string name);
 };
 
 #endif // LIBRARY_H

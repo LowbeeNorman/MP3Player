@@ -30,7 +30,7 @@ std::vector<std::string> getSongNames(){
 void Library::listItemClicked(QListWidgetItem *item){
     std::string songName = item->text().toStdString();
     std::string filePath = getSongPath(songName);
-    emit requestPlaySong(&filePath);
+    emit requestPlaySong(&filePath, songName);
 }
 
 Library::Library(QWidget *parent)

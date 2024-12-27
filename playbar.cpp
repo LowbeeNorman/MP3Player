@@ -38,6 +38,10 @@ void Playbar::playButtonShowPlay(){
     emit musicPaused();
 }
 
+void Playbar::setCurrentSongName(QString songname){
+    ui->songName->setText(songname);
+}
+
 void Playbar::playButtonShowPause(){
     playing = false;
     ui->playButton->setText("Paused");

@@ -34,6 +34,7 @@ public slots:
     void loopButtonToggle();
     void shuffleButtonToggle();
 
+    void setCurrentSongName(QString songname);
 signals:
     void playPressed();
     void loopPressed();

@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::songStarted, ui->playbar, &Playbar::playButtonShowPause);
     connect(ui->playbar, &Playbar::musicPaused, this, &MainWindow::pauseSong);
     connect(ui->playbar, &Playbar::musicPlayed, this, &MainWindow::resumeSong);
+    connect(this, &MainWindow::currentSongName, ui->playbar, &Playbar::setCurrentSongName);
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +35,7 @@ const void* getFile(std::string* file){
     return file->data();
 }
 
-void MainWindow::startSong(std::string* filepath){
+void MainWindow::startSong(std::string* filepath, std::string songname){
     sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
     std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
     channel = BASS_SampleGetChannel(sample, 0);
@@ -44,6 +45,7 @@ void MainWindow::startSong(std::string* filepath){
     BASS_ChannelStart(channel);
     std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
     emit songStarted();
+    emit currentSongName(QString::fromStdString(songname));
 }
 
 
@@ -57,6 +59,10 @@ void MainWindow::resumeSong(){
     if(BASS_ChannelIsActive(channel)){
         BASS_ChannelStart(channel);
     }
+}
+
+void MainWindow::playSongAtTime(double time){
+    BASS_ChannelUpdate(sample, BASS_ChannelSeconds2Bytes(sample, time)); // Updates the channel to play at a specific time, but has to convert to bytes
 }
 
 void MainWindow::changeScreenIndex(int index){

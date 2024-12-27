@@ -20,9 +20,10 @@ public:
 
 public slots:
     void changeScreenIndex(int index);
-    void startSong(std::string* filepath);
+    void startSong(std::string* filepath, std::string songname);
     void pauseSong();
     void resumeSong();
+    void playSongAtTime(double time);
     // void skipSong();
 
 signals:
@@ -30,6 +31,7 @@ signals:
     void songStarted();
     void songStopped();
     void songSkipped();
+    void currentSongName(QString songname);
 
 private:
     Ui::MainWindow *ui;
