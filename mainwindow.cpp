@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     BASS_Init(-1, 44100, 0, 0, NULL); // Initialize BASS, should be done once
-    std::cout << "INITIALIZE: " << BASS_ErrorGetCode() << std::endl;
+    // std::cout << "INITIALIZE: " << BASS_ErrorGetCode() << std::endl;
 
 
     ui->setupUi(this);
@@ -36,16 +36,20 @@ const void* getFile(std::string* file){
 }
 
 void MainWindow::startSong(std::string* filepath, std::string songname){
-    sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
-    std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
-    channel = BASS_SampleGetChannel(sample, 0);
-    std::cout << "CHANNEL: " << BASS_ErrorGetCode() << std::endl;
-    BASS_ChannelPlay(channel, TRUE);
-    std::cout << "CHANNELPLAY: " << BASS_ErrorGetCode() << std::endl;
-    BASS_ChannelStart(channel);
-    std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
-    emit songStarted();
-    emit currentSongName(QString::fromStdString(songname));
+    if(BASS_ChannelIsActive(channel)){
+        BASS_ChannelStop(sample);
+    }
+        sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
+        // std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
+        channel = BASS_SampleGetChannel(sample, 0);
+        // std::cout << "CHANNEL: " << BASS_ErrorGetCode() << std::endl;
+        BASS_ChannelPlay(channel, TRUE);
+        // std::cout << "CHANNELPLAY: " << BASS_ErrorGetCode() << std::endl;
+        BASS_ChannelStart(channel);
+        // std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
+        emit songStarted();
+        emit currentSongName(QString::fromStdString(songname));
+
 }
 
 

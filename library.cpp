@@ -1,5 +1,7 @@
 #include "library.h"
 #include "ui_library.h"
+#include "libraryitem.h"
+#include "clickablelabel.h"
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -39,9 +41,16 @@ Library::Library(QWidget *parent)
 {
     std::vector<std::string> songs = getSongNames();
     ui->setupUi(this);
+
+
+
     for(std::string song : songs){
         QString qsong = QString::fromStdString(song);
-        ui->songList->addItem(qsong);
+        QListWidgetItem *listWidgetItem = new QListWidgetItem(ui->songList);
+        libraryItem *item = new libraryItem(parent, qsong);
+        listWidgetItem->setSizeHint(item->sizeHint());
+        ui->songList->setItemWidget(listWidgetItem, item);
+
     }
     connect(ui->songList, &QListWidget::itemClicked, this, &Library::listItemClicked);
 }

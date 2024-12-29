@@ -45,8 +45,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="backButton">
+   <item row="2" column="4">
+    <widget class="QPushButton" name="loopButton">
      <property name="minimumSize">
       <size>
        <width>60</width>
@@ -60,26 +60,7 @@
       </size>
      </property>
      <property name="text">
-      <string>Back</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QPushButton" name="playButton">
-     <property name="minimumSize">
-      <size>
-       <width>60</width>
-       <height>60</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>60</width>
-       <height>60</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Paused</string>
+      <string>Not Looping</string>
      </property>
     </widget>
    </item>
@@ -102,8 +83,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="4">
-    <widget class="QPushButton" name="loopButton">
+   <item row="2" column="2">
+    <widget class="QPushButton" name="playButton">
      <property name="minimumSize">
       <size>
        <width>60</width>
@@ -117,14 +98,26 @@
       </size>
      </property>
      <property name="text">
-      <string>Not Looping</string>
+      <string>Paused</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="5">
-    <widget class="QSlider" name="songSlider">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="backButton">
+     <property name="minimumSize">
+      <size>
+       <width>60</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>60</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Back</string>
      </property>
     </widget>
    </item>
@@ -143,6 +136,13 @@
      </property>
      <property name="text">
       <string>Song name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="5">
+    <widget class="QSlider" name="songSlider">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
