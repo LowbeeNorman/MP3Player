@@ -7,18 +7,16 @@ clickableLabel::clickableLabel(QWidget *parent, QString name)
 {
     ui->setupUi(this);
     ui->name->setText(name);
-    connect( this, SIGNAL( clicked() ), this, SLOT( slotClicked() ) );
 }
 
 void clickableLabel::mousePressEvent ( QMouseEvent * event )
 {
-    emit clicked();
-}
-void clickableLabel::slotClicked()
-{
-    qDebug()<<"Clicked";
+    emit clicked(insideText.toStdString());
 }
 
+void clickableLabel::setInsideText(const QString s){
+    insideText = s;
+}
 clickableLabel::~clickableLabel()
 {
     delete ui;

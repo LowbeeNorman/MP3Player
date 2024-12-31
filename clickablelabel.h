@@ -15,16 +15,18 @@ class clickableLabel : public QLabel
 public:
     explicit clickableLabel(QWidget *parent = nullptr, QString name = "");
     ~clickableLabel();
+    void setInsideText(const QString s);
 
 private:
     Ui::clickableLabel *ui;
+    QString insideText = "";
 
 signals:
-    void clicked();
+    void clicked(std::string name);
 
 private slots:
-    void slotClicked();
     void mousePressEvent (QMouseEvent * event );
+
 
 };
 

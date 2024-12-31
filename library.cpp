@@ -52,7 +52,7 @@ Library::Library(QWidget *parent)
         ui->songList->setItemWidget(listWidgetItem, item);
 
     }
-    connect(ui->songList, &QListWidget::itemClicked, this, &Library::listItemClicked);
+    connect(ui->songList, &QListWidget::itemPressed, this, &Library::listItemClicked);
 }
 
 

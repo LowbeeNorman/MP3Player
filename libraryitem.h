@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::libraryItem *ui;
+
+signals:
+    void songClicked();
+
+private slots:
+    void itemClicked(std::string name);
 };
 
 #endif // LIBRARYITEM_H
