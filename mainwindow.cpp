@@ -46,28 +46,34 @@ void MainWindow::songCheck(HSYNC handle, DWORD channel, DWORD data, void *user){
     emit currentSongFinished();
 }
 
+
+void CALLBACK SyncProc(HSYNC handle, DWORD channel, DWORD data, void *user){
+    qDebug() << "HERE";
+}
+
+
 void MainWindow::startSong(std::string* filepath, std::string songname){
     if(!BASS_ChannelIsActive(channel)){
         sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
         // std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
+
         channel = BASS_SampleGetChannel(sample, 0);
         // std::cout << "CHANNEL: " << BASS_ErrorGetCode() << std::endl;
-        BASS_ChannelPlay(channel, TRUE);
-        // std::cout << "CHANNELPLAY: " << BASS_ErrorGetCode() << std::endl;
+
         BASS_ChannelStart(channel);
         // std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
+
         emit songStarted();
         emit currentSongName(QString::fromStdString(songname));
-        HSYNC BASS_ChannelSetSync(
-            channel,
-            BASS_SYNC_THREAD,
-            BASS_SYNC_END,
-            songCheck,
-            0
-            );
+
+        BASS_ChannelSetSync(sample, BASS_SYNC_MIXTIME | BASS_SYNC_END, 0, SyncProc, 0);
+        std::cout << "CHANNELSETSYNC: " << BASS_ErrorGetCode() << std::endl;
+
     }
 
 }
+
+
 
 
 void MainWindow::pauseSong(){
