@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "bass24\c\bass.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,8 +33,11 @@ signals:
     void songStopped();
     void songSkipped();
     void currentSongName(QString songname);
+    void playNext();
+    void currentSongFinished();
 
 private:
     Ui::MainWindow *ui;
+    void songCheck(HSYNC handle, DWORD channel, DWORD data, void *user);
 };
 #endif // MAINWINDOW_H

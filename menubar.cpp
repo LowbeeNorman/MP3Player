@@ -6,7 +6,7 @@ MenuBar::MenuBar(QWidget *parent)
     , ui(new Ui::MenuBar)
 {
     ui->setupUi(this);
-    connect(ui->homeButton, &QPushButton::clicked, this, &MenuBar::receiveHomeClicked);
+    connect(ui->queueButton, &QPushButton::clicked, this, &MenuBar::receiveHomeClicked);
     connect(ui->libraryButton, &QPushButton::clicked, this, &MenuBar::receiveLibraryClicked);
 }
 
@@ -24,11 +24,11 @@ void MenuBar::receiveLibraryClicked(){
 }
 
 void MenuBar::receiveToggleButtons(){
-    if(ui->homeButton->isEnabled()){
-        ui->homeButton->setDisabled(true);
+    if(ui->queueButton->isEnabled()){
+        ui->queueButton->setDisabled(true);
     }
     else{
-        ui->homeButton->setDisabled(false);
+        ui->queueButton->setDisabled(false);
     }
     if(ui->libraryButton->isEnabled()){
         ui->libraryButton->setDisabled(true);

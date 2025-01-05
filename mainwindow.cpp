@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "bass24\c\bass.h"
 #include <iostream>
+#include <thread>
 
 HSAMPLE sample;
 HCHANNEL channel;
@@ -23,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->playbar, &Playbar::musicPaused, this, &MainWindow::pauseSong);
     connect(ui->playbar, &Playbar::musicPlayed, this, &MainWindow::resumeSong);
     connect(this, &MainWindow::currentSongName, ui->playbar, &Playbar::setCurrentSongName);
+    connect(ui->songLibrary, &Library::addSongToQueue, ui->queue, &Home::addToQueue);
+    connect(this, &MainWindow::currentSongFinished, ui->queue, &Home::needToPlayNext);
+    connect(ui->queue, &Home::nextSongToPlay, ui->songLibrary, &Library::playItemConvert);
 }
 
 MainWindow::~MainWindow()
@@ -35,10 +39,15 @@ const void* getFile(std::string* file){
     return file->data();
 }
 
-void MainWindow::startSong(std::string* filepath, std::string songname){
-    if(BASS_ChannelIsActive(channel)){
-        BASS_ChannelStop(sample);
+void MainWindow::songCheck(HSYNC handle, DWORD channel, DWORD data, void *user){
+    while(BASS_ChannelIsActive(channel)){
+        // do nothing
     }
+    emit currentSongFinished();
+}
+
+void MainWindow::startSong(std::string* filepath, std::string songname){
+    if(!BASS_ChannelIsActive(channel)){
         sample = BASS_SampleLoad(false, getFile(filepath), 0, 0, 1, 0);
         // std::cout << "HSAMPLE: " << BASS_ErrorGetCode() << std::endl;
         channel = BASS_SampleGetChannel(sample, 0);
@@ -49,6 +58,14 @@ void MainWindow::startSong(std::string* filepath, std::string songname){
         // std::cout << "CHANNELSTART: " << BASS_ErrorGetCode() << std::endl;
         emit songStarted();
         emit currentSongName(QString::fromStdString(songname));
+        HSYNC BASS_ChannelSetSync(
+            channel,
+            BASS_SYNC_THREAD,
+            BASS_SYNC_END,
+            songCheck,
+            0
+            );
+    }
 
 }
 

@@ -13,7 +13,7 @@ class playlistButton : public QWidget
     Q_OBJECT
 
 public:
-    explicit playlistButton(QWidget *parent = nullptr);
+    explicit playlistButton(QWidget *parent, QString name);
     ~playlistButton();
 
 private:

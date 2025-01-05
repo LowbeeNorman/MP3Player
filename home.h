@@ -21,6 +21,21 @@ public:
 
 private:
     Ui::Home *ui;
+    bool repeat = false;
+
+signals:
+    void removeButtonClicked(std::string name);
+    void upButtonClicked(std::string name);
+    void downButtonClicked(std::string name);
+    void nextSongToPlay(std::string songName);
+
+public slots:
+    // void removeButtonPressed();
+    // void upButtonPressed();
+    // void downButtonPressed();
+    void needToPlayNext();
+    void addToQueue(QString name);
+
 };
 
 

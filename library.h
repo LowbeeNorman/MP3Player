@@ -21,9 +21,11 @@ private:
 
 public slots:
     void listItemClicked(QListWidgetItem *item);
+    void playItemConvert(std::string song);
 
 signals:
     void requestPlaySong(std::string * filePath, std::string name);
+    void addSongToQueue(QString songName);
 };
 
 #endif // LIBRARY_H
